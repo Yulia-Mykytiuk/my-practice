@@ -10,26 +10,20 @@ namespace ConsoleApplication4
     {
         static void Main(string[] args)
         {
-            // not finished yet
             List<long> Primes = new List<long>();
 
-            for (long i = 1; i < 2000; i++)
+            for (long i = 2; i < 2000000; i++)
             {
                 bool test = false;
-                for (long j = i - 1; j > 0; j--)
+                for (long j = i - 1; j > 1; j--)
                 {
                     if (i % j == 0)
-                    {
-                        test = false;
-                        //break;
-                    }
-                    else
                     {
                         test = true;
                         break;
                     }
                 }
-                if (test)
+                if (!test)
                 {
                     Primes.Add(i);
                     test = false;
