@@ -10,154 +10,45 @@ namespace ConsoleApplication4
     {
         static void Main(string[] args)
         {
-            // **************************************
-            int summ = 0;
-            for (int i = 0; i < 1000; i++)
-            {
-                if (i % 3 == 0 || i % 5 == 0)
-                {
-                    summ += i;
-                }
-            }
-            //Console.Out.WriteLine("Summ = {0}", summ);
-            //Console.ReadLine();
+            // not finished yet
+            List<long> Primes = new List<long>();
 
-            // **************************************
-
-            List<int> Fibonacci = new List<int>();
-            Fibonacci.Add(1);
-            Fibonacci.Add(2);
-
-            for (int i = 0; i < 100; i++)
-            {
-                var length = Fibonacci.Count();
-                var x = Fibonacci.ElementAt(length - 1);
-                var y = Fibonacci.ElementAt(length - 2);
-                var a = Convert.ToInt32(x) + Convert.ToInt32(y);
-                if (x <= 4000000)
-                {
-                    Fibonacci.Add(a);
-                }
-            }
-
-            int Fib_summ = 0;
-
-            Fibonacci.ForEach(delegate(int item) 
-            {
-                //Console.Write(item + ", ");
-            });
-            //Console.ReadLine();
-
-            for (int i = 0; i <= Fibonacci.Count-1; i++ )
-            {
-                if (Fibonacci[i] < 4000000 && Fibonacci[i] % 2 == 0)
-                {
-                    Fib_summ += Fibonacci[i];
-                }
-            }
-
-            //Console.Out.WriteLine("Summ = {0}", Fib_summ);
-            //Console.Read();
-
-            // **************************************
-
-            List<long> biggestPalindrom = new List<long>();
-
-            for (int i = 999; i > 0; i--)
-            {
-                for (int j = 999; j > 0; j--)
-                {
-                    int mnoz = i * j;
-                    string mnozstr = mnoz.ToString();
-                    string revstr = StringHelper.ReverseString(mnozstr);
-                    if (mnozstr == revstr)
-                    {
-                        biggestPalindrom.Add(mnoz);
-                    }
-                }
-            }
-
-            long biggest = biggestPalindrom.Max();
-            //Console.Out.WriteLine("The biggest number = {0}", biggest);
-            //Console.ReadKey();
-
-            // **************************************
-
-            List<long> smalestMultiple = new List<long>();
-
-            for (long i = 1; i < 1000000000; i++)
+            for (long i = 1; i < 2000; i++)
             {
                 bool test = false;
-                for (int j = 1; j <= 20; j++)
+                for (long j = i - 1; j > 0; j--)
                 {
                     if (i % j == 0)
                     {
+                        test = false;
+                        //break;
+                    }
+                    else
+                    {
                         test = true;
-                    }
-                    else 
-                    { 
-                        test = false; 
-                        break; 
+                        break;
                     }
                 }
-                if (test == true)
+                if (test)
                 {
-                    smalestMultiple.Add(i);
+                    Primes.Add(i);
+                    test = false;
                 }
             }
 
-            long result = smalestMultiple.Min();
-            //Console.Out.WriteLine("Smalest multiple = {0}", result);
-            //Console.ReadKey();
+            long summ = 0;
 
-            // **********************************
-
-            int SummOfSqares = 0;
-            int SquareOfSumm = 0;
-
-            for (int i = 1; i <= 100; i++)
+            Primes.ForEach(delegate(long item)
             {
-                SquareOfSumm += i;
-                SummOfSqares += i * i;
-            }
-
-            SquareOfSumm *= SquareOfSumm;
-            int difference = SquareOfSumm - SummOfSqares;
-            //Console.Out.WriteLine("Difference = {0}", difference);
-            //Console.ReadLine();
-
-            // *************************************
-
-            long Largesta = 600851475143;
-            long PrimeResult = PrimeFactors.LargestPrimeFactor(Largesta);
-            Console.Out.WriteLine("Largest Prime Factor = {0}", PrimeResult);
-            Console.ReadLine();
-        }
-    }
-
-    static class StringHelper
-    {
-        public static string ReverseString(string s)
-        {
-            char[] arr = s.ToCharArray();
-            Array.Reverse(arr);
-            return new string(arr);
-        }
-    }
-
-    static class PrimeFactors
-    {
-        public static long LargestPrimeFactor(long x)
-        {
-            for (long i = x-1; i > 0; i--)
-            {
-                if (x % i == 0)
+                if (item < 2000000)
                 {
-                    return i;
+                    summ += item;
                 }
-            }
-            return x;
+                Console.Write(item + ", ");
+            });
+
+            Console.WriteLine("Summ of primes below 2 million = {0}", summ);
+            Console.ReadKey();
         }
     }
-
 }
